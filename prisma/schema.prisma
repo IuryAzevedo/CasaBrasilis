@@ -24,21 +24,22 @@ model User {
 
 model Property {
   id         String   @id @default(uuid())
+  imagePaths String[]
   city       String
   state      String
   street     String
   neighborhood String
-  zipcode    Int
+  zipcode    String
   type       String //casa ou apto
   identifier String // identificar exclusivamente o imovel (ex: numero da casa, andar do apartamento)
   bathrooms   Int
   bedrooms    Int
   size       Int
-  parking    Int
+  parking    Int    
   buy_price  Float
-  interest_rate Int
+  interest_rate Float
   finance_options Int
-  rental_price Int
+  rental_price Float
   created_at DateTime? @default(now())
   transactions Transaction[]
   

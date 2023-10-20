@@ -1,11 +1,12 @@
 import prismaClient from "../../prisma";
 
 interface PropertiesRequest {
-    city:       string
-    state:      string
-    street:     string
+    imagePaths: string,
+    city: string
+    state: string
+    street: string
     neighborhood: string // bairro
-    zipcode:    number
+    zipcode:    string
     type:       string //casa ou apto
     identifier: string // identificar exclusivamente o imovel (ex: numero da casa, andar do apartamento)
     bathrooms:   number
@@ -21,6 +22,7 @@ interface PropertiesRequest {
 
 class CreatePropertiesService {
     async execute({
+        imagePaths,
         city, 
         state,
         street,
@@ -35,14 +37,16 @@ class CreatePropertiesService {
         buy_price,
         interest_rate,
         finance_options,
-        rental_price }: PropertiesRequest){
+        rental_price }){
 
             if(identifier === " "){
                 throw new Error('Você não cadastrou nenhuma propiedade')
             }
+            // let banner = " "
 
             const addProperties = await prismaClient.property.create({
                 data: {
+                    imagePaths,
                     city, 
                     state,
                     street,
@@ -50,18 +54,20 @@ class CreatePropertiesService {
                     zipcode,
                     type,
                     identifier,
-                    bathrooms,
-                    bedrooms,
-                    size,
-                    parking,
-                    buy_price,
-                    interest_rate,
-                    finance_options,
-                    rental_price
+                    bathrooms: Number(bathrooms),
+                    bedrooms: Number(bedrooms),
+                    size: Number(size),
+                    parking: Number(parking),
+                    buy_price: Number(buy_price),
+                    interest_rate: Number(interest_rate),
+                    finance_options: Number(finance_options),
+                    rental_price: Number(rental_price)
+                    
                 },
 
                 select: {
                     id: true,
+                    imagePaths: true,
                     city: true,
                     state: true,
                     street: true,
