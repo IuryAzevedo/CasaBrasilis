@@ -1,23 +1,23 @@
 import prismaClient from "../../prisma";
 
-interface PropertiesRequest {
-    imagePaths: string,
-    city: string
-    state: string
-    street: string
-    neighborhood: string // bairro
-    zipcode:    string
-    type:       string //casa ou apto
-    identifier: string // identificar exclusivamente o imovel (ex: numero da casa, andar do apartamento)
-    bathrooms:   number
-    bedrooms:    number
-    size:       number
-    parking:    number
-    buy_price:  number
-    interest_rate: number // taxa de juros 
-    finance_options: number // opcoes de financeamento
-    rental_price: number // preco de alugue
-}
+// interface PropertiesRequest {
+//     imagePaths: string,
+//     city: string
+//     state: string
+//     street: string
+//     neighborhood: string // bairro
+//     zipcode:    string
+//     type:       string //casa ou apto
+//     identifier: string // identificar exclusivamente o imovel (ex: numero da casa, andar do apartamento)
+//     bathrooms:   number
+//     bedrooms:    number
+//     size:       number
+//     parking:    number
+//     buy_price:  number
+//     interest_rate: number // taxa de juros 
+//     finance_options: number // opcoes de financeamento
+//     rental_price: number // preco de alugue
+// }
 
 
 class CreatePropertiesService {
@@ -42,8 +42,6 @@ class CreatePropertiesService {
             if(identifier === " "){
                 throw new Error('Você não cadastrou nenhuma propiedade')
             }
-            // let banner = " "
-
             const addProperties = await prismaClient.property.create({
                 data: {
                     imagePaths,
@@ -64,7 +62,6 @@ class CreatePropertiesService {
                     rental_price: Number(rental_price)
                     
                 },
-
                 select: {
                     id: true,
                     imagePaths: true,
