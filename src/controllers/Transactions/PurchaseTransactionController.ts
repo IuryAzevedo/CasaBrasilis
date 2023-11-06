@@ -5,7 +5,7 @@ import { PurchaseTransactionService } from "../../services/Transactions/Purchase
 class PurchaseTransactionController {
   async handle(req: Request, res: Response) {
     try {
-      const { userId, propertyId, amount, transactionDate } = req.body; // Certifique-se de que esses dados estejam disponíveis no corpo da requisição
+      const { userId, propertyId, amount, transactionDate, duration } = req.body; // Certifique-se de que esses dados estejam disponíveis no corpo da requisição
 
       const purchaseTransactionService = new PurchaseTransactionService();
       const purchaseTransaction = await purchaseTransactionService.execute({
@@ -13,6 +13,7 @@ class PurchaseTransactionController {
         propertyId,
         amount,
         transactionDate,
+        duration
       });
 
       res.status(201).json(purchaseTransaction);

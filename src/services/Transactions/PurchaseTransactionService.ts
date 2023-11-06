@@ -5,7 +5,8 @@ class PurchaseTransactionService {
     userId, 
     propertyId, 
     amount, 
-    transactionDate, 
+    transactionDate,
+    duration 
   }) {
     try {
       
@@ -20,6 +21,7 @@ class PurchaseTransactionService {
           transactionType: "purchase", 
           amount,
           transactionDate,
+          duration
         },
       });
 

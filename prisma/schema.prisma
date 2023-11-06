@@ -55,6 +55,7 @@ model Transaction {
   transactionType String
   transactionDate DateTime
   amount Float
+  duration Int 
   created_at DateTime? @default(now())
 
   @@map("transactions")

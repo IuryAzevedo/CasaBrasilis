@@ -9,6 +9,8 @@ import uploadConfig from './config/multer'
 import { transporter } from "./services/nodemailer/Transport";
 import { sendEmailWelcome } from "./controllers/nodemailer/nodemailerController";
 import { PurchaseTransactionController } from "./controllers/Transactions/PurchaseTransactionController";
+import { RentalTransactionController } from "./controllers/Transactions/RentalTransactionController";
+
 
 
 const router = Router();
@@ -37,6 +39,7 @@ router.post('/send-welcome-email', async (req, res) => {
   
 // ---- ROTAS TRASAÇÕES ----
 router.post('/purchasetransaction', isAuthAtheticated, new PurchaseTransactionController().handle);
+router.post('/rentaltransaction', isAuthAtheticated, new RentalTransactionController().handle)
 
 
 export {router}
