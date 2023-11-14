@@ -6,7 +6,7 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
@@ -23,27 +23,36 @@ model User {
 }
 
 model Property {
-  id         String   @id @default(uuid())
-  imagePaths String[]
-  city       String
-  state      String
-  street     String
+  id           String       @id @default(uuid())
+  city         String
+  state        String
+  street       String
   neighborhood String
-  zipcode    String
-  type       String //casa ou apto
-  identifier String // identificar exclusivamente o imovel (ex: numero da casa, andar do apartamento)
-  bathrooms   Int
-  bedrooms    Int
-  size       Int
-  parking    Int    
-  buy_price  Float
+  zipcode      String
+  type         String // casa ou apto
+  identifier   String // identificar exclusivamente o imovel (ex: numero da casa, andar do apartamento)
+  bathrooms    Int
+  bedrooms     Int
+  size         Int
+  parking      Int    
+  buy_price    Float
   interest_rate Float
   finance_options Int
   rental_price Float
-  created_at DateTime? @default(now())
+  created_at   DateTime?   @default(now())
   transactions Transaction[]
-  
+  images       PropertyImage[]
+
   @@map("properties")
+}
+model PropertyImage {
+  id       String   @id @default(uuid())
+  property Property @relation(fields: [propertyId], references: [id])
+  propertyId String
+  imagePath String
+  created_at DateTime? @default(now())
+
+  @@map("property_images")
 }
 
 model Transaction {
